@@ -4,7 +4,7 @@
 
 ## Requirement of the design
 
-- Ds must be unique.
+- IDs must be unique.
 - IDs are numerical values only.
 - IDs fit into 64-bit.
 - IDs are ordered by date.
