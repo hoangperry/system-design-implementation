@@ -1,27 +1,18 @@
-import json
 import time
 import socket
 import requests
 
 
 HASH_SERVICE = 'http://127.0.0.1:8000/?value='
-EXTERNALAPI_SERVICE = 'https://api.ipify.org'
+EXTERNAL_API_SERVICE = 'https://api.ipify.org'
+
 
 class IdGen:
-    def __init__(self):
+    def __init__(self, hash_service=None):
+        self.hash_service = HASH_SERVICE if hash_service is None else hash_service
         self.machine_id = self.get_machine_id()
-        self.last_time : int = 0
+        self.last_time: int = 0
         self.sequence = 0
-
-    @staticmethod
-    def get_machine_external_ip():
-        # Improve here by using internal service
-        return requests.get(EXTERNALAPI_SERVICE).content.decode('utf8')
-
-    def set_timestamp(self, tt):
-        if tt == self.last_time:
-            self.last_time = tt
-            self.sequence = 0
 
     @staticmethod
     def get_timestamp():
@@ -29,8 +20,17 @@ class IdGen:
         return int((time.time() * 1000) % (10 ** 11))
 
     @staticmethod
-    def get_machine_id():
-        url = HASH_SERVICE + IdGen.get_machine_external_ip() + '_' + socket.gethostname()
+    def get_machine_external_ip():
+        # Improve here by using internal service
+        return requests.get(EXTERNAL_API_SERVICE).content.decode('utf8')
+
+    def set_timestamp(self, tt):
+        if tt == self.last_time:
+            self.last_time = tt
+            self.sequence = 0
+
+    def get_machine_id(self):
+        url = self.hash_service + self.get_machine_external_ip() + '_' + socket.gethostname()
         response = requests.request("POST", url, headers={}, data={})
         return response.json()['id']
 
@@ -41,6 +41,13 @@ class IdGen:
         return final
 
 
+"""
+Test ID gen
+Test ID gen
+Test ID gen
+Test ID gen
+Test ID gen
+"""
 if __name__ == '__main__':
     gene = IdGen()
     print(gene.machine_id)

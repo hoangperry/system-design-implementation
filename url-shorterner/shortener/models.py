@@ -10,4 +10,4 @@ class Shorten(models.Model):
     deleted_at = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        db_table = 'tag'
+        db_table = 'shortener'
