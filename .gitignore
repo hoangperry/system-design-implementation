@@ -1,3 +1,9 @@
 unique-id-generator/build/*
 unique-id-generator/dist/*
 unique-id-generator/unique_id_generator.egg-info/*
+
+url-shorterner/nginx/protect/*
+url-shorterner/nginx/ssl/*
+url-shorterner/nginx/ssl-log/*
+url-shorterner/nginx/www/*
+url-shorterner/nginx/snippets/*
