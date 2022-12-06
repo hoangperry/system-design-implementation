@@ -1,0 +1,2 @@
+unique-id-generator
+django~=3.1
