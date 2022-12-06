@@ -4,6 +4,9 @@ import socket
 import requests
 
 
+HASH_SERVICE = 'http://127.0.0.1:8000/?value='
+EXTERNALAPI_SERVICE = 'https://api.ipify.org'
+
 class IdGen:
     def __init__(self):
         self.machine_id = self.get_machine_id()
@@ -13,7 +16,7 @@ class IdGen:
     @staticmethod
     def get_machine_external_ip():
         # Improve here by using internal service
-        return requests.get('https://api.ipify.org').content.decode('utf8')
+        return requests.get(EXTERNALAPI_SERVICE).content.decode('utf8')
 
     def set_timestamp(self, tt):
         if tt == self.last_time:
@@ -27,8 +30,7 @@ class IdGen:
 
     @staticmethod
     def get_machine_id():
-        this_machine_lid = IdGen.get_machine_external_ip() + '_' + socket.gethostname()
-        url = f"http://127.0.0.1:8000/?value={this_machine_lid}"
+        url = HASH_SERVICE + IdGen.get_machine_external_ip() + '_' + socket.gethostname()
         response = requests.request("POST", url, headers={}, data={})
         return response.json()['id']
 

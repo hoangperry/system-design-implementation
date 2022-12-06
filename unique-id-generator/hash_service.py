@@ -4,6 +4,9 @@ import uvicorn
 from fastapi import FastAPI
 
 
+FAKE_HASH_TABLE_DB = './database/FakeHashTable.pickle'
+
+
 class FakeHashTable:
     def __init__(self, bit_limitation=10):
         self.limitation = 2 ** bit_limitation
@@ -62,19 +65,19 @@ class FakeHashTable:
 
 
 def backup_htb_object(in_htb):
-    with open('./database/FakeHashTable.pickle', 'wb') as ff:
+    with open(FAKE_HASH_TABLE_DB, 'wb') as ff:
         pickle.dump(in_htb, ff)
 
 
 def load_htb_object():
-    with open('./database/FakeHashTable.pickle', 'rb') as ff:
+    with open(FAKE_HASH_TABLE_DB, 'rb') as ff:
         data = pickle.load(ff)
     return data
 
 
 app = FastAPI()
 
-if os.path.exists('./database/FakeHashTable.pickle'):
+if os.path.exists(FAKE_HASH_TABLE_DB):
     htb = load_htb_object()
 else:
     htb = FakeHashTable()
