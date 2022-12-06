@@ -3,27 +3,17 @@
 version: '3.8'
 
 services:
-  database:
+  pg_database:
     image: postgres:14.1-alpine
     restart: always
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    ports:
-      - '5432:5432'
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     volumes:
-      - db_data:/var/lib/postgresql/data
-
-  hash_service:
-    restart: always
-    build:
-      dockerfile: hash_service.Dockerfile
-      context: ../unique-id-generator/
-    command: uvicorn hash_service:app --host 0.0.0.0
-    volumes:
-      - .:/app
+      - ./db_data:/var/lib/postgresql/data
+      - ./shortener.sql:/docker-entrypoint-initdb.d/shortener.sql
     ports:
-      - "8001:8000"
+      - "5432:5432"
 
   web_service:
     restart: always
@@ -32,14 +22,17 @@ services:
       dockerfile: shortener.Dockerfile
     volumes:
       - .:/home/app/web
-      - shortener_static_volume:/home/app/web/static
-    command: python3 manage.py runserver --noreload 0.0.0.0:8000
+    command: ./server_entrypoint
+    depends_on:
+      - pg_database
     ports:
       - "8000:8000"
+    links:
+      - pg_database
 
   nginx:
     restart: always
-    build: ./nginx/
+    image: nginx:alpine
     volumes:
       - ./nginx/www:/var/www:ro
       - ./nginx/sites-enabled/conf.d:/etc/nginx/conf.d:ro
@@ -50,8 +43,10 @@ services:
     ports:
       - "443:443"
       - "80:80"
+    depends_on:
+      - web_service
     links:
-      - web
+      - web_service
 
   certbot:
     image: certbot/certbot

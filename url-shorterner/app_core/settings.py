@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'shortener',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,7 +50,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'url_shortener.urls'
+ROOT_URLCONF = 'app_core.urls'
 
 TEMPLATES = [
     {
@@ -67,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'url_shortener.wsgi.application'
+WSGI_APPLICATION = 'app_core.wsgi.application'
 
 
 # Database
@@ -75,9 +76,14 @@ WSGI_APPLICATION = 'url_shortener.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'USER': 'shortener_server',
+        'CHARSET': 'UTF8',
+        'PASSWORD': 'secret123',
+        'HOST': 'localhost',
+        'PORT': '5432',
+        'NAME': 'shortener',
+    },
 }
 
 

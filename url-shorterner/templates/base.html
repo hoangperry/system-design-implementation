@@ -1,10 +1,18 @@
-<!DOCTYPE html>
+{% load static %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+
+{% include 'head/head.html' %}
 <body>
+
+    {% block body-content %}
+
+    {% endblock %}
+
+
+
+    {% include "basic/footer.html" %}
+    {% block import-script %}
+    {% endblock %}
 
 </body>
 </html>
