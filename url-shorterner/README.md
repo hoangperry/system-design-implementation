@@ -15,7 +15,7 @@ https://hoang.tech/abcxyz. If you click the alias, it redirects you to the origi
 1. **Endpoints:**
    - URL shortening: to create new short URL, client sends a POST request, 
    which contains one parameter: the original URL:
-     - POST: `api/v1/data/shortern` 
+     - POST: `api/v1/data/shorten` 
      - Request: `{long_url: long_url_string}`
      - Return: `short_url`
 
@@ -65,4 +65,20 @@ https://hoang.tech/abcxyz. If you click the alias, it redirects you to the origi
    however this method can lead to hash collisions. To resolve hash collisions, we can recursively append a new predefined string util no more collision
    is discovered. however it is expensive to query the database to check if a short URL exists for every request
    - A technique called bloom filters can improve performance. A bloom filter is a space-efficient probabilistic technique to test if an element is a member of a set
-   
+
+4. Base 62 Conversion
+   - Base conversion is another approach commonly used for URL shortener. 
+   - Base conversion helps to convert the same number between its different number representation systems. 
+   - Base 62 conversion is used as there are 62 possible character for hash_value. 
+
+5. Comparison
+   - Hash + collision
+     - Fixed short URL length.
+     - It does not need a unique ID generator.
+     - Collision is possible and must be resolved.
+     - It is impossible to figure out the next available short URL because it does not depend on ID
+   - Base 62 conversion
+     - The short URL length is not fixed. It goes up with the ID.
+     - This options depends on a unique ID generator.
+     - Collision is impossible because ID is unique
+     - It is easy to figure out the next available short URL if ID increments by 1 for a new entry. This can be a security concern
