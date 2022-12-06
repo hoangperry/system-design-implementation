@@ -1,0 +1,3 @@
+unique-id-generator/build/*
+unique-id-generator/dist/*
+unique-id-generator/unique_id_generator.egg-info/*
