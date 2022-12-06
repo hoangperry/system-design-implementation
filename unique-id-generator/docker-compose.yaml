@@ -1,0 +1,14 @@
+# docker-compose.yml
+
+version: '3.8'
+
+services:
+  hash_service:
+    build:
+      dockerfile: hash_service.Dockerfile
+      context: .
+    command: uvicorn hash_service:app --host 0.0.0.0
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"

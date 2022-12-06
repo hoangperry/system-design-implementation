@@ -8,9 +8,12 @@ EXTERNAL_API_SERVICE = 'https://api.ipify.org'
 
 
 class IdGen:
-    def __init__(self, hash_service=None):
+    def __init__(self, hash_service=None, machine_id=None):
         self.hash_service = HASH_SERVICE if hash_service is None else hash_service
-        self.machine_id = self.get_machine_id()
+
+        # Machine ID muse less than ~1000 (less than 10 bit)
+        # Ideally the machine ID must split to 2 element is Cluster/Datacenter IDs and Machine/Service IDs
+        self.machine_id = self.get_machine_id() if machine_id is None else machine_id
         self.last_time: int = 0
         self.sequence = 0
 
@@ -42,10 +45,6 @@ class IdGen:
 
 
 """
-Test ID gen
-Test ID gen
-Test ID gen
-Test ID gen
 Test ID gen
 """
 if __name__ == '__main__':

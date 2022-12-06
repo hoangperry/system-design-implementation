@@ -1,8 +1,14 @@
-FROM python:3.8
-WORKDIR /code
-COPY ./requirements.txt /code/requirements.txt
+FROM python:3.8.12
+# set work directory
+WORKDIR /app
 
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+# set env variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-COPY . /code/
-CMD ["uvicorn", "hash_service.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# install dependencies
+COPY requirements.txt /app
+RUN pip3 install -r requirements.txt
+
+# copy project
+COPY . .
