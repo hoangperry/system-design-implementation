@@ -56,8 +56,8 @@ https://hoang.tech/abcxyz. If you click the alias, it redirects you to the origi
 
 2. **Hash function:**
     - **Hash value length:** the hash value consists [0-9, a-z, A-Z], mean 62 possible characters. To figure out the length of hash_value,
-   find the smallest `n` such as 62^n >= 365 billion. The system must be support up to 365 billion URLs based on the back of the envelope estimation.
-    - n=7, 62^n = ~3.5 trillion is more than enough to hold 365 billion URLs, so the length of hash_value is 7
+   find the smallest `n` such as $(62^n)$ >= 365 billion. The system must be support up to 365 billion URLs based on the back of the envelope estimation.
+    - n=7, $(62^n = ~3.5)$ trillion is more than enough to hold 365 billion URLs, so the length of hash_value is 7
 
 3. **collision resolution:**
    - We should implement a hash function that hashes a URRL to a 7-char string.
