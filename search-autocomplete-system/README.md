@@ -27,4 +27,4 @@ $24.000 \text{ (QPS)} = \frac{1.000.000.000 \text{ (users)} \times 10.000 \text{
 - Assume 20% of the daily queries are new.
 - 0.4 GB of new data is added to storage daily
 
-1.000.000.000 \text{ (users)} \times 10.000 \text{ (queries/day)} \times 20\text{ (bytes per query)} \times 20\% \cong 0.4 \text{ GB}
+$1.000.000.000 \text{ (users)} \times 10.000 \text{ (queries/day)} \times 20\text{ (bytes per query)} \times 20\% \cong 0.4 \text{ GB}$
