@@ -4,7 +4,7 @@ from .models import Shorten
 from .base62 import encode
 
 from unique_id_generator.id_gen import IdGen
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from rest_framework import status
 from rest_framework.views import APIView
@@ -17,23 +17,22 @@ distributed_id_generator = IdGen(machine_id=MACHINE_ID)
 
 
 def home_view(request):
-    final_response = {
-        'page_info': {
-            'name': 'HTI R&D Dashboard - Home',
-            'url': '/'
-        }
-    }
-    return render(request, 'index.html', final_response)
+    return render(request, 'index.html')
 
 
 def to_origin(request):
-    final_response = {
-        'page_info': {
-            'name': 'HTI R&D Dashboard - Home',
-            'url': '/'
-        }
-    }
-    return render(request, 'index.html', final_response)
+    shorten_path = request.path
+    if '/' in shorten_path:
+        shorten_path = shorten_path[1:]
+    if len(shorten_path) != 7:
+        # Raise 404 or return a noti
+        return render(request, 'index.html')
+
+    query_result = Shorten.objects.filter(shorten=shorten_path).first()
+    if query_result is None:
+        return render(request, 'index.html')
+
+    return redirect(query_result.origin, permanent=True)
 
 
 class RESTShortener(APIView):
