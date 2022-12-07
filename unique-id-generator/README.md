@@ -60,4 +60,4 @@ We will getting deep dive with Twitter snowflake approach.
 Any changes in datacenter IDs and machine IDs require careful review since an accidental change in those values can lead to ID conflicts.
 In this implementation I will use IP and hostname of machine with a hashtable instead.
 - Timestamp: The most important 41 bít make up the timestamp section. As timestamps grow with time, IDs are sortable by time
-- Sequence number is 12 bits, which give us $(2^(12) = 4096)$ combinations. This field is 0 unless more than one ID is a milisecond on the same server. In theory, a machine can support a maximum of 4096 new IDs per millisecond
+- Sequence number is 12 bits, which give us $(2^12 = 4096)$ combinations. This field is 0 unless more than one ID is a milisecond on the same server. In theory, a machine can support a maximum of 4096 new IDs per millisecond
