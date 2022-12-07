@@ -14,11 +14,11 @@ def home_view(request):
             'url': '/'
         }
     }
-    return render(request, 'page/index.html', final_response)
+    return render(request, 'index.html', final_response)
 
 
 class RESTShortener(APIView):
     @staticmethod
     def post(request):
-
+        print(request)
         return Response({'a': 1}, status=status.HTTP_200_OK)
