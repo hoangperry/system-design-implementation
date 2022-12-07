@@ -1,1 +1,1 @@
-from id_gen import IdGen
+name = "unique_id_generator"

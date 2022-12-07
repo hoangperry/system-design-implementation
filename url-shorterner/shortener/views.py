@@ -1,10 +1,15 @@
 import os
 
+from .models import Shorten
+from unique_id_generator.id_gen import IdGen
+
 from django.shortcuts import render
 
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+
+dsitributed_id_generator = IdGen()
 
 
 def home_view(request):
@@ -20,5 +25,5 @@ def home_view(request):
 class RESTShortener(APIView):
     @staticmethod
     def post(request):
-        print(request)
+        original_url = request.POST.get('original_url', '')
         return Response({'a': 1}, status=status.HTTP_200_OK)

@@ -1,12 +1,10 @@
 from setuptools import setup, find_packages
 
-VERSION = '0.0.2'
+VERSION = '0.0.6'
 DESCRIPTION = 'Unique ID Generator'
 LONG_DESCRIPTION = 'An implementation for System Design Interview books'
 
-# Setting up
 setup(
-    # the name must match the folder name 'verysimplemodule'
     name="unique_id_generator",
     version=VERSION,
     author="Hoang N. Truong",
@@ -14,9 +12,8 @@ setup(
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     packages=find_packages(),
-    install_requires=[],  # add any additional packages that
-    # needs to be installed along with your package. Eg: 'caer'
-
+    url="https://github.com/hoangperry/system-design-implementation/tree/master/unique-id-generator",
+    install_requires=[],
     keywords=['python', 'first package'],
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
