@@ -23,4 +23,8 @@ On everage, 20 requests are sent for each search query.
 
 $24.000 \text{ (QPS)} = \frac{1.000.000.000 \text{ (users)} \times 10.000 \text{ (queries/day)} \times 20\text{ (characters)}} {24 \text{ (hours)} \times 3600 \text{ (seconds)})}$
 
+- Peak $QPS = QPS \times 2$
+- Assume 20% of the daily queries are new.
+- 0.4 GB of new data is added to storage daily
 
+1.000.000.000 \text{ (users)} \times 10.000 \text{ (queries/day)} \times 20\text{ (bytes per query)} \times 20\% \cong 0.4 \text{ GB}
