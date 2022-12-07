@@ -23,3 +23,8 @@ def decode(string, alphabet=BASE_62_CHARSET):
         num += alphabet.index(char) * (base ** power)
         idx += 1
     return num
+
+
+if __name__ == '__main__':
+    res = encode(1721325588508)
+    print(res)

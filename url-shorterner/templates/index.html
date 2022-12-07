@@ -10,10 +10,21 @@
         <form id="shortenForm">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Type here your URL"
-                       name="original_url" id="originalURL">
-                <button type="submit" class="btn btn-dark">Short URL</button>
+                       name="original_url" id="originalURL" pattern="http(s)*://.*" >
+                <button type="submit" id="submitBtn" class="btn btn-dark">Short URL</button>
             </div>
         </form>
+        <div class="text-center" id="loadSpin" style="display: none;">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <div class="text-center" id="containerResult" style="display: none;">
+            <a href="#" id="resultShorten" class="btn btn-lg btn-info" role="button" data-bs-toggle="button">
+                Go to your shorten
+            </a>
+            <button class="btn btn-lg btn-secondary" id="copyBtn" onclick="copyLink()">Copy</button>
+        </div>
     </div>
 </div>
 
@@ -21,5 +32,4 @@
 
 {% block import-script %}
 <script src="{% static 'index.js' %}"></script>
-
 {% endblock %}
